@@ -1,0 +1,6 @@
+.postsList {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 350px);
+  gap: 10px;
+}
