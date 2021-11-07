@@ -33,7 +33,6 @@ export function deletePost(postId: number) {
 }
 
 export function updatePost(postId: number, body: Partial<Post> ) {
-  console.log(postId, body);
   return fetch(`${API_URL}/posts/${postId}`, {
     method: "PUT",
     headers: {
