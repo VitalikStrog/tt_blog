@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { asyncUpdatePost, selectPostId } from './PostsList/postsListSlice';
+import { asyncUpdatePost, changePost, selectPostId } from './PostsList/postsListSlice';
 
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -27,7 +27,8 @@ export const EditForm: React.FC = () => {
 
   const updatePost = () => {
     const params = { postId, updatedPost: { title, body }}
-    dispatch(asyncUpdatePost(params))
+    dispatch(asyncUpdatePost(params));
+    dispatch(changePost(0));
     handleClose();
     clearForm();
   };
