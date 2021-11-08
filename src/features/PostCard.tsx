@@ -26,6 +26,7 @@ export const PostCard: React.FC<Props> = ({ post }) => {
   }
 
   const deletePost = () => {
+    dispatch(changePost(0));
     dispatch(removePost(post.id));
   }
 
