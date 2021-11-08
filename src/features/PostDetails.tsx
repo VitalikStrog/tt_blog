@@ -58,7 +58,7 @@ export const PostDetails = () => {
           </Avatar>
         }
         action={
-          <EditForm />
+          <EditForm titleValue={post.title} bodyValue={post.body} />
         }
         title={post.title}
       />

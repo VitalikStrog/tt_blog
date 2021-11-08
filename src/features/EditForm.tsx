@@ -9,11 +9,15 @@ import TextField from '@mui/material/TextField';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
-import { loadPost } from './PostsList/postsListAPI';
 
-export const EditForm: React.FC = () => {
-  const [title, setTitle] = useState<string>('');
-  const [body, setBody] = useState<string>('');
+type Props = {
+  titleValue: string;
+  bodyValue: string;
+}
+
+export const EditForm: React.FC<Props> = ({ titleValue, bodyValue }) => {
+  const [title, setTitle] = useState<string>(titleValue);
+  const [body, setBody] = useState<string>(bodyValue);
   const [open, setOpen] = useState<boolean>(false);
   const postId = useAppSelector(selectPostId);
   const handleOpen = () => setOpen(true);
@@ -26,20 +30,12 @@ export const EditForm: React.FC = () => {
   };
 
   const updatePost = () => {
-    const params = { postId, updatedPost: { title, body }}
+    const params = { postId, updatedPost: { title: (title || titleValue), body: (body || bodyValue) }}
     dispatch(asyncUpdatePost(params));
     dispatch(changePost(0));
     handleClose();
     clearForm();
   };
-
-  useEffect(() => {
-    loadPost(postId)
-      .then(loadedPost => {
-        setTitle(loadedPost.title);
-        setBody(loadedPost.body);
-      });
-  }, [])
 
   return (
     <div>
@@ -78,7 +74,7 @@ export const EditForm: React.FC = () => {
             id="outlined-basic"
             label="Edit title"
             variant="outlined"
-            value={title}
+            defaultValue={titleValue}
             onChange={event => setTitle(event.target.value)}
           />
           <TextField
@@ -86,7 +82,7 @@ export const EditForm: React.FC = () => {
             id="outlined-basic"
             label="Edit post's content"
             variant="outlined"
-            value={body}
+            defaultValue={bodyValue}
             onChange={event => setBody(event.target.value)}
           />
           <ButtonGroup variant="contained" aria-label="outlined primary button group">
