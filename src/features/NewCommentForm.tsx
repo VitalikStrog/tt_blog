@@ -17,6 +17,7 @@ export const NewCommentForm = () => {
   };
 
   const handleClose = () => {
+    setBody('');
     setAnchorEl(null);
   };
 

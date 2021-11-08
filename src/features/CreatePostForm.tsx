@@ -12,13 +12,17 @@ export const CreatePostForm: React.FC = () => {
   const [title, setTitle] = useState<string>('');
   const [body, setBody] = useState<string>('');
   const [open, setOpen] = useState<boolean>(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   const dispatch = useAppDispatch();
 
   const clearForm = () => {
     setTitle('');
     setBody('');
+  };
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    setOpen(false);
+    clearForm();
   };
 
   const createNewPost = () => {
